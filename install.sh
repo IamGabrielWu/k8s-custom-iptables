@@ -21,5 +21,5 @@ if [[ -z ${TARGETS:-} ]]; then
   exit 1
 fi
 
-kubectl apply -f daemon.yaml
-sed "s+__NAT_RULES__+${TARGETS}+g" config.yaml.in | kubectl apply -f -
+kubectl apply -f daemon.yaml -n iptables
+sed "s+__NAT_RULES__+${TARGETS}+g" config.yaml.in | kubectl -n iptables apply -f -
